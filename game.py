@@ -9,10 +9,23 @@ def resource_path(relative):
 		return os.path.join(sys._MEIPASS, relative)
 	return os.path.join(relative)
 
-#NOTE: image resources + small manipulations
+def main():
+	pygame.init()
+	
 
-#NOTE: sound resources + small manipulations
+	#NOTE: image resources + small manipulations
 
-#NOTE: game itself???
-running = 1
-exitcode = 0 #change this in game code and then call the next screen, exitcode will decide the next screen
+	#NOTE: sound resources + small manipulations
+
+	#NOTE: game itself???
+	running = True
+	exitcode = 0 #change num in game code and then call the next screen, exitcode will decide the next screen
+
+	while running:
+	
+	if exitcode == 0:
+
+	if exitcode == 1:
+
+
+main()
