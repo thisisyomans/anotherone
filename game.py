@@ -31,7 +31,7 @@ def main():
 	#NOTE: sound resources + small manipulations
 
 	#NOTE: game itself???
-	running = True
+	running = True #better than ust running a "while True:" loop, now we can check program state w/ a var
 	exitcode = 0 #change num in game code and then call the next screen, exitcode will decide the next screen
 
 	while running:
