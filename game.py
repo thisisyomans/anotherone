@@ -20,8 +20,8 @@ def main():
 	
 	#setting up fps
 	frame_count = 0
-    frame_rate = 0
-    t0 = time.clock()
+	frame_rate = 0
+	t0 = time.clock()
 
 	#any needed vars, arrays, lists, etc
 	keys = [False, False, False, False]
