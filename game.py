@@ -40,13 +40,12 @@ def main():
 		
 		if eventlook.type == pygame.QUIT():
 			pygame.quit()
+		
 		if eventlook.type == pygame.KEYDOWN:
 			if eventlook.key == K_q:
 				pygame.quit()
 
-
-			
-
+		if eventlook.type == pygame.KEYUP:
 
 		frame_count += 1
 		if frame_count % 500 == 0:
