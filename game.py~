@@ -41,18 +41,16 @@ def main():
 		if eventlook.type == pygame.QUIT():
 			pygame.quit()
 		if eventlook.type == pygame.KEYDOWN:
-			if eventlook.key == K_q:
-				pygame.quit()
-
-
+			if event.key == K_q:
+                pygame.quit()
 			
 
 
 		frame_count += 1
-		if frame_count % 500 == 0:
-			t1 = time.clock()
-			frame_rate = 500 / (t1-t0)
-			t0 = t1
+        if frame_count % 500 == 0:
+            t1 = time.clock()
+            frame_rate = 500 / (t1-t0)
+            t0 = t1
 		
 		pygame.display.flip()
 	
