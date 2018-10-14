@@ -30,9 +30,9 @@ def main():
 
 	#NOTE: sound resources + small manipulations
 
-	#NOTE: game itself???
-	running = True #better than ust running a "while True:" loop, now we can check program state w/ a var
-	exitcode = 0 #change num in game code and then call the next screen, exitcode will decide the next screen
+	#NOTE: game itself
+	running = True #better than just running a "while True:" loop, now we can check program state w/ a var
+	exitcode = 0 #change num in game code, set running to False, when running is set to False, while loop breaks, and game looks for next screen based on exitcode
 
 	while running:
 		
