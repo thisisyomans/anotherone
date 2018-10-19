@@ -10,6 +10,7 @@ def resource_path(relative):
 	return os.path.join(relative)
 
 #MAJOR NOTE: maybe create function outside of main for event handling that is called inside each of the running states rather than writing the entire loop itself
+	#maybe not for the menu screen and game screens, cause conflicting keys/actions, but probably for the 2 end screens
 
 def main():
 	#initialize game
