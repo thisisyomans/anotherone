@@ -9,7 +9,7 @@ def resource_path(relative):
 		return os.path.join(sys._MEIPASS, relative)
 	return os.path.join(relative)
 
-#MAJOR NOTE: maybe create function outside of main for events that is called inside each of the running states rather than writing the entire loop itself
+#MAJOR NOTE: maybe create function outside of main for event handling that is called inside each of the running states rather than writing the entire loop itself
 
 def main():
 	#initialize game
