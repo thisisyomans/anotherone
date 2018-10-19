@@ -16,7 +16,7 @@ def main():
 	pygame.init()
 
 	#screen details
-	pygame.display.set_caption('RoboTirade')
+	pygame.display.set_caption('')
 	width, height = 640, 480
 	screen = pygame.display.set_mode((width, height))
 
