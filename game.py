@@ -36,7 +36,7 @@ def main():
 	running = 1 #better than just running a "while True:" loop, now we can check program state w/ a var
 	exitcode = 0 #change num in game code, set running to False, when running is set to False, while loop breaks, and game looks for next screen based on exitcode
 
-	while running == 1:
+	while running == 1: #NOTE: menu
 
 		eventlook = pygame.event.poll()
 		
@@ -49,7 +49,7 @@ def main():
 
 		if eventlook.type == pygame.KEYUP:
 
-	while running == 2:
+	while running == 2: #NOTE: game screen
 		
 		eventlook = pygame.event.poll()
 		
@@ -59,6 +59,15 @@ def main():
 		if eventlook.type == pygame.KEYDOWN:
 			if eventlook.key == K_q:
 				pygame.quit()
+
+			if eventlook.key == K_w:
+				keys[0] = True
+			if eventlook.key == K_a:
+				keys[1] = True
+			if eventlook.key == K_s:
+				keys[2] = True
+			if eventlook.key == K_d:
+				keys[3] = True
 
 		if eventlook.type == pygame.KEYUP:
 
@@ -70,9 +79,32 @@ def main():
 		
 		pygame.display.flip()
 	
-	if exitcode == 0 and running == 3:
+	if exitcode == 0 and running == 3: #NOTE: losing end screen
+		
+		eventlook = pygame.event.poll()
+		
+		if eventlook.type == pygame.QUIT():
+			pygame.quit()
+		
+		if eventlook.type == pygame.KEYDOWN:
+			if eventlook.key == K_q:
+				pygame.quit()
+			if eventlook.key == K_r:
 
-	if exitcode == 1 and running == 3:
+		if eventlook.type == pygame.KEYUP:
 
+	if exitcode == 1 and running == 3: #NOTE: winning end screen
+
+		eventlook = pygame.event.poll()
+		
+		if eventlook.type == pygame.QUIT():
+			pygame.quit()
+		
+		if eventlook.type == pygame.KEYDOWN:
+			if eventlook.key == K_q:
+				pygame.quit()
+			if eventlook.key == K_r:
+
+		if eventlook.type == pygame.KEYUP:
 
 main()
