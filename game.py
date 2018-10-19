@@ -9,6 +9,8 @@ def resource_path(relative):
 		return os.path.join(sys._MEIPASS, relative)
 	return os.path.join(relative)
 
+#MAJOR NOTE: maybe create function outside of main for events that is called inside each of the running states rather than writing the entire loop itself
+
 def main():
 	#initialize game
 	pygame.init()
@@ -17,7 +19,7 @@ def main():
 	pygame.display.set_caption('RoboTirade')
 	width, height = 640, 480
 	screen = pygame.display.set_mode((width, height))
-	
+
 	#setting up fps
 	frame_count = 0
 	frame_rate = 0
@@ -31,10 +33,23 @@ def main():
 	#NOTE: sound resources + small manipulations
 
 	#NOTE: game itself
-	running = True #better than just running a "while True:" loop, now we can check program state w/ a var
+	running = 1 #better than just running a "while True:" loop, now we can check program state w/ a var
 	exitcode = 0 #change num in game code, set running to False, when running is set to False, while loop breaks, and game looks for next screen based on exitcode
 
-	while running:
+	while running == 1:
+
+		eventlook = pygame.event.poll()
+		
+		if eventlook.type == pygame.QUIT():
+			pygame.quit()
+		
+		if eventlook.type == pygame.KEYDOWN:
+			if eventlook.key == K_q:
+				pygame.quit()
+
+		if eventlook.type == pygame.KEYUP:
+
+	while running == 2:
 		
 		eventlook = pygame.event.poll()
 		
@@ -55,9 +70,9 @@ def main():
 		
 		pygame.display.flip()
 	
-	if exitcode == 0:
+	if exitcode == 0 and running == 3:
 
-	if exitcode == 1:
+	if exitcode == 1 and running == 3:
 
 
 main()
