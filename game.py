@@ -71,6 +71,14 @@ def main():
 				keys[3] = True
 
 		if eventlook.type == pygame.KEYUP:
+			if eventlook.key == K_w:
+				keys[0] = False
+			if eventlook.key == K_a:
+				keys[1] = False
+			if eventlook.key == K_s:
+				keys[2] = False
+			if eventlook.key == K_d:
+				keys[3] = False
 
 		frame_count += 1
 		if frame_count % 500 == 0:
