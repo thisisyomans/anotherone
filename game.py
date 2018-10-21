@@ -25,7 +25,7 @@ class Menu(ezpygame.Scene):
 	def __init__(self, size):
         super().__init__()
 
-    def on_enter(self, previous_scene):
+	def on_enter(self, previous_scene):
         super().on_enter(previous_scene)
         self.previous_scene = None
 	
@@ -44,7 +44,7 @@ class Game(ezpygame.Scene):
 	def __init__(self, size):
         super().__init__()
 
-    def on_enter(self, previous_scene):
+	def on_enter(self, previous_scene):
         super().on_enter(previous_scene)
         self.previous_scene = main_menu
 	
@@ -62,7 +62,7 @@ class Lose(ezpygame.Scene): #exitcode of 0
 	def __init__(self, size):
         super().__init__()
 
-    def on_enter(self, previous_scene):
+	def on_enter(self, previous_scene):
         super().on_enter(previous_scene)
         self.previous_scene = game_screen
 	
@@ -77,7 +77,7 @@ class Win(ezpygame.Scene): #exitcode of 1
 	def __init__(self, size):
         super().__init__()
 
-    def on_enter(self, previous_scene):
+	def on_enter(self, previous_scene):
         super().on_enter(previous_scene)
         self.previous_scene = game_screen
 	
