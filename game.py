@@ -1,4 +1,4 @@
-import pygame, math, time, random, os, sys
+import pygame, math, time, random, os, sys, ezpygame
 from pygame.locals import *
 
 #NOTE: alternative method for filepaths, meant to make packaging easier
@@ -9,102 +9,90 @@ def resource_path(relative):
 		return os.path.join(sys._MEIPASS, relative)
 	return os.path.join(relative)
 
-#MAJOR NOTE: maybe create function outside of main for event handling that is called inside each of the running states rather than writing the entire loop itself
-	#maybe not for the menu screen and game screens, cause conflicting keys/actions, but probably for the 2 end screens
+width, height = 640, 480
+keys = [False, False, False, False]
+exitcode = 0
+running = 0
 
-def main():
-	#initialize game
-	pygame.init()
+#NOTE: image resources
 
-	#screen details
-	pygame.display.set_caption('')
-	width, height = 640, 480
-	screen = pygame.display.set_mode((width, height))
+#NOTE: audio resources
 
-	#setting up fps
-	frame_count = 0
-	frame_rate = 0
-	t0 = time.clock()
 
-	#any needed vars, arrays, lists, etc
-	restart = False
-	keys = [False, False, False, False]
-	running = 2 #better than just running a "while True:" loop, now we can check program state w/ a var
-	exitcode = 0 #change num in game code, set running to False, when running is set to False, while loop breaks, and game looks for next screen based on exitcode
+class Menu(ezpygame.Scene):
+	title = ' - Main Menu'
 
-	#NOTE: possible restart function
-	#def restart_game():
-		#if(restart == True):
-			#restart = False
-			#change running state to switch scenes
+	def __init__(self, size):
+        super().__init__()
 
-	#event system
-	def event_system():
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				pygame.quit()
-			
-			if event.type == pygame.KEYDOWN:
-				if event.key == K_q:
-					pygame.quit()
+    def on_enter(self, previous_scene):
+        super().on_enter(previous_scene)
+        self.previous_scene = None
+	
+	def on_exit(self, next_scene):
+		super.on_exit(next_scene)
+		self.next_scene = game_screen
 
-				if event.key == K_r and running == 3:
-					restart = True
-					restart_game()
+    #self.application.change_scene(self.previous_scene)
+	#self.application.change_scene(self.next_scene)
 
-				if event.key == K_w:
-					keys[0] = True
-				if event.key == K_a:
-					keys[1] = True
-				if event.key == K_s:
-					keys[2] = True
-				if event.key == K_d:
-					keys[3] = True
+class Game(ezpygame.Scene):
+	title = ""
+	update_rate = 60
+	running = 1
 
-			if event.type == pygame.KEYUP:
+	def __init__(self, size):
+        super().__init__()
 
-				if event.key == K_w:
-					keys[0] = False
-				if event.key == K_a:
-					keys[1] = False
-				if event.key == K_s:
-					keys[2] = False
-				if event.key == K_d:
-					keys[3] = False
+    def on_enter(self, previous_scene):
+        super().on_enter(previous_scene)
+        self.previous_scene = main_menu
+	
+	def on_exit(self, next_scene):
+		super.on_exit(next_scene)
+		if exitcode == 0:
+			self.next_scene = lose_screen
+		else:
+			self.next_scene = win_screen	
 
-	#NOTE: image resources + small manipulations
+class Lose(ezpygame.Scene): #exitcode of 0
+	title = ' - You Lose!'
+	running = 0
 
-	#NOTE: sound resources + small manipulations
+	def __init__(self, size):
+        super().__init__()
 
-	#NOTE: game itself
-	while running == 1 and restart == False: #NOTE: menu
-		#probably a clickable sprite button on screen for starting the game
-		#pygame.display.flip(), pretty sure I don't need it for now, but you never know
-		event_system() #I don't think I need the key system here, gonna have to check the logic
+    def on_enter(self, previous_scene):
+        super().on_enter(previous_scene)
+        self.previous_scene = game_screen
+	
+	def on_exit(self, next_scene):
+		super.on_exit(next_scene)
+		self.next_scene = main_menu
 
-	while running == 2 and restart == False: #NOTE: game screen
-		frame_count += 1
-		if frame_count % 500 == 0:
-			t1 = time.clock()
-			frame_rate = 500 / (t1-t0)
-			t0 = t1
+class Win(ezpygame.Scene): #exitcode of 1
+	title = ' - You Win!'
+	running = 0
 
-		screen.fill((255, 255, 255))
-		
-		my_font = pygame.font.Font(resource_path(os.path.join('resources', 'freesansbold.ttf')), 24)
-		the_text = my_font.render("Frame = {0},  rate = {1:.2f} fps"
-		.format(frame_count, frame_rate), True, (0,0,0))
-		screen.blit(the_text, (10, 10))
-		
-		pygame.display.flip()
-		event_system()
+	def __init__(self, size):
+        super().__init__()
 
-	if exitcode == 0 and running == 3 and restart == False: #NOTE: losing end screen
-		#pygame.display.flip(), pretty sure I don't need it for now, but you never know
-		event_system()
+    def on_enter(self, previous_scene):
+        super().on_enter(previous_scene)
+        self.previous_scene = game_screen
+	
+	def on_exit(self, next_scene):
+		super.on_exit(next_scene)
+		self.next_scene = main_menu
 
-	if exitcode == 1 and running == 3 and restart == False: #NOTE: winning end screen
-		#pygame.display.flip(), pretty sure I don't need it for now, but you never know
-		event_system()
+app = ezpygame.Application(
+	title = '',
+	resolution = (width, height),
+	update_rate =  30
+)
 
-main()
+main_menu = Menu()
+game_screen = Game()
+lose_screen = Lose()
+win_screen = Win()
+app.run(main_menu)
